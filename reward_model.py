@@ -30,11 +30,10 @@ class RewardModel(nn.Module):
         # https://huggingface.co/transformers/v3.0.2/model_doc/distilbert.html#distilbertmodel
         # feed the pooled representation through the reward modeling head to ge the actual reward
         # BEGIN STUDENT CODE (~3 lines)
-        # 1. Pass inputs through the transformer encoder
         outputs = self.encoder(input_ids=input_ids, attention_mask=attention_mask)
         last_hidden_state = outputs.last_hidden_state
         cls_embedding = last_hidden_state[:, 0, :]        
-        reward = self.head(cls_embedding)
+        reward = self.head(cls_embedding).squeeze(-1)
         # END STUDENT CODE
         return reward
 
