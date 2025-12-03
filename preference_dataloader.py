@@ -33,6 +33,10 @@ class PreferenceDataloader():
         # Exclude the good summary itself
         # Then select the *closest* different summary (hard negative)
         # BEGIN STUDENT CODE (~4 lines)
+        scores = util.cos_sim(emb_good, emb_summaries)[0]
+        scores[idx] = -float('inf')        
+        bad_idx = torch.argmax(scores).item()        
+        bad_summary = dataset[bad_idx]["highlights"]
         # END STUDENT CODE
 
         return prompt, good_summary, bad_summary
@@ -45,6 +49,14 @@ class PreferenceDataloader():
         # Label the sample "1" if "A" is the good summary
         # Label the sample "0" if "B" is the good summary
         # BEGIN STUDENT CODE (~6 lines)
+        if random.random() > 0.5:
+            response_A = good_summary
+            response_B = bad_summary
+            label = 1
+        else:
+            response_A = bad_summary
+            response_B = good_summary
+            label = 0
         # END STUDENT CODE
             
         return response_A, response_B, label
