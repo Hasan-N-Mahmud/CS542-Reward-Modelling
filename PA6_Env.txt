@@ -1,0 +1,27 @@
+PA6 environment and dependencies
+
+On a department remote machine Python 3.9 is system-provided.
+If you create a new environment on the remote machine, it is best to unalias python and unset PYTHONPATH first.
+Then 
+Create your environment:
+python3.9 -m venv yourenv
+Activate yourenv:
+source yourenv/bin/activate
+
+These versions work:
+torch = 2.8.0+cu128
+transformers = 4.57.1
+accelerate = 1.10.1
+peft = 0.17.1
+datasets = 4.4.1
+sentence-transformers = 5.1.2
+
+To make sure dependencies install in your env, when you want to install in your env, always do ./yourenv/bin/python -m pip install… 
+For example:
+./yourenv/bin/python -m pip install torch>=2.0.0
+./yourenv/bin/python -m pip install transformers accelerate datasets
+./yourenv/bin/python -m pip install sentence-transformers
+
+
+Run the script:
+./yourenv/bin/python yourscript.py
