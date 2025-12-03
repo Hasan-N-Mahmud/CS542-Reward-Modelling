@@ -28,6 +28,18 @@ def compute_mean_reward(rewards):
     # remember that winning response according to the model is the one with the higher reward,
     #  but that this sample may occur in either the first OR second position in the pair
     # BEGIN STUDENT CODE (~10 lines)
+    print(rewards)
+    for batch in rewards:
+        for rA, rB in batch:
+            if rA > rB: 
+                winners.append(rA)
+                losers.append(rB)
+            else:          
+                winners.append(rB)
+                losers.append(rA)
+
+    win_mean = sum(winners) / len(winners) if len(winners) > 0 else 0.0
+    lose_mean = sum(losers) / len(losers) if len(losers) > 0 else 0.0
     # END STUDENT CODE
     
     return win_mean, lose_mean
