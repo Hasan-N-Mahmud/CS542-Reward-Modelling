@@ -11,7 +11,9 @@ def compute_pairwise_accuracy(preds, labels):
         # compute pairwise accuracy over all training samples
         # a correct sample is one where the predicted preference label equals the true preference label
         # BEGIN STUDENT CODE (~3 lines)
-        pass
+        correct = (preds == labels).sum().item()
+        total = labels.size(0)
+        accuracy = correct / total if total > 0 else 0.0
         # END STUDENT CODE
     return accuracy
 
